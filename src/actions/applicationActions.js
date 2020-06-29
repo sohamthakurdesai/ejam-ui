@@ -78,7 +78,7 @@ export const addDeployment = (data) => {
             method: 'post',
             responseType: 'json',
             url: `${service_url}/adddeployment`,
-            body: {
+            data: {
                 "url": url,
                 "templateName": templateName,
                 "version": version

@@ -7,32 +7,34 @@ const DeploymentDetails = () => {
 
     if(deploymentDataFetchError !== "") {
         return(
-            <Form>
+            <div style={{'padding-top':'40px'}}>
                 Error: {deploymentDataFetchError}
-            </Form>
+            </div>
         )
     } else {
 
         if(deploymentData.message) {
             return(
-                <Form>
+                <div style={{'padding-top':'40px'}}>
                     {deploymentData.message}
-                </Form>
+                </div>
             )
         } else {
             return(
-                <Table bordered responsive>
-                    <thead>
-                        <tr>
-                            <th>Template Name</th>
-                            <th>Version</th>
-                            <th>Deployed Date</th>
-                            <th>URL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </Table>
+                <div style={{'padding-top':'40px'}}>
+                    <Table bordered responsive>
+                        <thead>
+                            <tr>
+                                <th>Template Name</th>
+                                <th>Version</th>
+                                <th>Deployed Date</th>
+                                <th>URL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </Table>
+                </div>
             )
         }
     }
