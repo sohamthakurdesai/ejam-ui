@@ -106,3 +106,36 @@ export const addDeployment = (data) => {
         }
     }
 }
+
+export const deleteDeployment = (_id) => {
+    return async (dispatch) => {
+        const request = {
+            method: 'delete',
+            responseType: 'json',
+            url: `${service_url}/deletedeployment`,
+            data: { "_id": _id },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+    
+        try {
+            let response = await axios(request)
+    
+            if(response.data) {
+                dispatch({
+                    type: "DELETE_DEPLOYMENT",
+                    data: response.data,
+                    error: ""
+                })
+            }
+        } catch (error) {
+            console.log("Error:", error)
+            dispatch({
+                type: "DELETE_DEPLOYMENT",
+                data: [],
+                error: "Error While getting the existing deployments. Contact Administrator."
+            })
+        }
+    }
+}

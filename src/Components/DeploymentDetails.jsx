@@ -1,9 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Table, Form, Button } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { Table, Button } from 'reactstrap';
+import { deleteDeployment } from '../actions/applicationActions';
 
 const DeploymentDetails = () => {
     let { deploymentData, deploymentDataFetchError } = useSelector(state => state.applicationReducer);
+    const dispatch = useDispatch()
 
     if(deploymentDataFetchError !== "") {
         return(
@@ -35,13 +37,18 @@ const DeploymentDetails = () => {
                             {
                                 deploymentData.map((element, i) => {
                                     return (
-                                        <tr>
+                                        <tr key={element._id}>
                                             <th>{element.templateName}</th>
                                             <th>{element.version}</th>
                                             <th>{element.createdAt}</th>
                                             <th>{element.url}</th>
                                             <th>
-                                                <Button>Delete</Button>
+                                                <Button id={element._id} onClick={(e) => {
+                                                    let _id = e.target.id
+                                                    dispatch(deleteDeployment(_id))
+                                                }}>
+                                                    Delete
+                                                </Button>
                                             </th>
                                         </tr>
                                     )

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Row, Col, FormGroup, Label, Input } from 'reactstrap';
 import { addDeployment } from '../actions/applicationActions'
 
-
 const TemplateForm = () => {
     let { templateData, templateDataFetchError } = useSelector(state => state.applicationReducer);
     const [versions, setVersions] = useState([]);
