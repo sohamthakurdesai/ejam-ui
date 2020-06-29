@@ -5,7 +5,6 @@ import { Table, Form, Button } from 'reactstrap';
 const DeploymentDetails = () => {
     let { deploymentData, deploymentDataFetchError } = useSelector(state => state.applicationReducer);
 
-    console.log("deploymentData==>", deploymentData)
     if(deploymentDataFetchError !== "") {
         return(
             <div style={{'paddingTop':'40px'}}>

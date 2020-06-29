@@ -71,8 +71,6 @@ export const addDeployment = (data) => {
     let templateName = JSON.parse(data.get("templateObj")).name
     let version = data.get("version")
 
-    alert("version"+ version )
-
     return async (dispatch) => {
         const request = {
             method: 'post',
