@@ -5,6 +5,8 @@ import { Form, Button, Row, Col, FormGroup, Label, Input } from 'reactstrap';
 const TemplateForm = () => {
     let { templateData, templateDataFetchError } = useSelector(state => state.applicationReducer);
     const [versions, setVersions] = useState([]);
+    const [selectedVersion, selectVersion] = useState("");
+    const [url, setUrl] = useState("");
 
     if(templateDataFetchError !== "") {
         return(
@@ -19,14 +21,13 @@ const TemplateForm = () => {
                     <Row>
                         <Col md={3}>
                             <FormGroup>
-                                <Label>Select Template</Label>
+                                <Label>Select Template*</Label>
                                 <Input
                                 type="select"
                                 name="templateName"
                                 id="templateName"
                                 onChange={(e) => {
                                     let templateObj = JSON.parse(e.target.value)
-                                    console.log("templateObj.versions==>", templateObj.versions)
                                     setVersions([...templateObj.versions]);
                                 }}
                             >
@@ -37,19 +38,15 @@ const TemplateForm = () => {
                             </Input>
                             </FormGroup>
                         </Col>
-                    </Row>
-                    <Row>
                         <Col md={3}>
                             <FormGroup>
-                                <Label>Select Version</Label>
+                                <Label>Select Version*</Label>
                                 <Input
                                 type="select"
                                 name="version"
                                 id="version"
                                 onChange={(e) => {
-                                    console.log("e.target.value==>", e.target.value)
-                                    // let selectValue = JSON.parse(e.currentTarget.value);
-                                    // setVersionList([...selectValue.versions]);
+                                    selectVersion(e.target.value)
                                 }}
                             >
                                 <option disabled/>
@@ -57,6 +54,18 @@ const TemplateForm = () => {
                                     <option key={i} data-options={v.options} value={JSON.stringify(v)}>{v}</option>
                                 ))}
                             </Input>
+                            </FormGroup>
+                        </Col>
+                        <Col md={3}>
+                            <FormGroup>
+                                <Label>Enter URL*</Label>
+                                <Input
+                                type="text"
+                                name="url"
+                                id="url"
+                                onChange={(e) => {
+                                    // selectVersion(e.target.value)
+                                }}/>
                             </FormGroup>
                         </Col>
                     </Row>
