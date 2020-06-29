@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Form, Button } from 'reactstrap';
 
 const TemplateForm = () => {
-    let { templateData, error } = useSelector(state => state.applicationReducer);
+    let { templateData, templateDataFetchError, deploymentDataFetchError } = useSelector(state => state.applicationReducer);
 
     console.log("templateData===>", templateData)
-    console.log("error===>", error)
+    console.log("templateDataFetchError===>", templateDataFetchError)
 
-    if(error !== "") {
+    if(templateDataFetchError !== "") {
         return(
             <Form>
-                Error: {error}
+                Error: {templateDataFetchError}
             </Form>
         )
     } else {

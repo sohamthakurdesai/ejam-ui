@@ -33,3 +33,35 @@ export const getTemplatesAndVersions = () => {
         }
     }
 }
+
+export const getDeployments = () => {
+    return async (dispatch) => {
+        const request = {
+            method: 'get',
+            responseType: 'json',
+            url: `${service_url}/getdeployment`,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        try {
+            let response = await axios(request)
+
+            if(response.data) {
+                dispatch({
+                    type: "GET_ALL_DEPLOYMENTS",
+                    data: response.data,
+                    error: ""
+                })
+            }
+        } catch (error) {
+            console.log("Error:", error)
+            dispatch({
+                type: "GET_ALL_DEPLOYMENTS",
+                data: [],
+                error: "Error While getting the existing deployments. Contact Administrator."
+            })
+        }
+    }
+}
