@@ -48,10 +48,10 @@ export const getDeployments = () => {
         try {
             let response = await axios(request)
 
-            if(response.data) {
+            if(response.data && response.data.data) {
                 dispatch({
                     type: "GET_ALL_DEPLOYMENTS",
-                    data: response.data,
+                    data: response.data.data,
                     error: ""
                 })
             }

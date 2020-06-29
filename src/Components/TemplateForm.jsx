@@ -14,10 +14,10 @@ const TemplateForm = () => {
 
     return(
         templateDataFetchError !== "" ?
-        <div style={{'padding-top':'40px'}}>
+        <div style={{'paddingTop':'40px'}}>
             Error: {templateDataFetchError}
         </div> :
-        <div style={{'padding-top':'40px'}}>
+        <div style={{'paddingTop':'40px'}}>
             <Form onSubmit={(e) => {
                 const data = new FormData(e.target);
                 dispatch(addDeployment(data))

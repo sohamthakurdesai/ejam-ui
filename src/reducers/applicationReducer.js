@@ -1,7 +1,8 @@
 const initialState = {
     templateData: [],
     deploymentData: [],
-    templateDataFetchError: ""
+    templateDataFetchError: "",
+    deploymentDataFetchError: ""
 }
 
 export default function applicationReducer(state = initialState, action) {
