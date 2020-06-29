@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Row, Col, FormGroup, Label, Input } from 'reactstrap';
+import { addDeployment } from '../actions/applicationActions'
+
 
 const TemplateForm = () => {
     let { templateData, templateDataFetchError } = useSelector(state => state.applicationReducer);
     const [versions, setVersions] = useState([]);
     const [selectedVersion, selectVersion] = useState("");
     const [url, setUrl] = useState("");
+
+    const dispatch = useDispatch()
 
     if(templateDataFetchError !== "") {
         return(
@@ -17,15 +21,18 @@ const TemplateForm = () => {
     } else {
         return(
             <div>
-                <Form>
+                <Form onSubmit={(e) => {
+                    const data = new FormData(e.target);
+                    dispatch(addDeployment(data))
+                } }>
                     <Row>
                         <Col md={3}>
                             <FormGroup>
                                 <Label>Select Template*</Label>
                                 <Input
                                 type="select"
-                                name="templateName"
-                                id="templateName"
+                                name="templateObj"
+                                id="templateObj"
                                 onChange={(e) => {
                                     let templateObj = JSON.parse(e.target.value)
                                     setVersions([...templateObj.versions]);
@@ -64,12 +71,16 @@ const TemplateForm = () => {
                                 name="url"
                                 id="url"
                                 onChange={(e) => {
-                                    // selectVersion(e.target.value)
+                                    setUrl(e.target.value)
                                 }}/>
                             </FormGroup>
                         </Col>
                     </Row>
-                    <Button>Submit</Button>
+                    <Row>
+                        <Col md={3} >
+                            <Button type="submit">Submit</Button>
+                        </Col>
+                    </Row>
                 </Form>
             </div>
         )

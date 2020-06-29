@@ -65,3 +65,46 @@ export const getDeployments = () => {
         }
     }
 }
+
+export const addDeployment = (data) => {
+    let url = data.get("url")
+    let templateName = JSON.parse(data.get("templateObj")).name
+    let version = data.get("version")
+
+    alert("version"+ version )
+
+    return async (dispatch) => {
+        const request = {
+            method: 'post',
+            responseType: 'json',
+            url: `${service_url}/adddeployment`,
+            body: {
+                "url": url,
+                "templateName": templateName,
+                "version": version
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        try {
+            let response = await axios(request)
+
+            if(response.data) {
+                dispatch({
+                    type: "ADD_NEW_DEPLOYMENTS",
+                    data: response.data,
+                    error: ""
+                })
+            }
+        } catch (error) {
+            console.log("Error:", error)
+            dispatch({
+                type: "ADD_NEW_DEPLOYMENTS",
+                data: [],
+                error: "Error While getting the existing deployments. Contact Administrator."
+            })
+        }
+    }
+}
