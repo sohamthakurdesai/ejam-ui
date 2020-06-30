@@ -51,7 +51,7 @@ const CountdownTimer = () => {
     return (
         <div>
             {
-                timerComponents.length ? <span>Loading the latest deployment list in {timerComponents} </span> : <DeploymentDetails/>
+                timerComponents.length ? <span>Loading the latest deployment(s) list in {timerComponents} </span> : <DeploymentDetails/>
             }   
         </div>
     );

@@ -7,7 +7,7 @@ export const getTemplatesAndVersions = () => {
         const request = {
             method: 'get',
             responseType: 'json',
-            url: `${service_url}/getalltemplates`,
+            url: `${service_url}/templates`,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -39,7 +39,7 @@ export const getDeployments = () => {
         const request = {
             method: 'get',
             responseType: 'json',
-            url: `${service_url}/getdeployment`,
+            url: `${service_url}/deployments`,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -89,7 +89,7 @@ export const addDeployment = (data) => {
         const request = {
             method: 'post',
             responseType: 'json',
-            url: `${service_url}/adddeployment`,
+            url: `${service_url}/deployments`,
             data: {
                 "url": url,
                 "templateName": templateName,
@@ -126,7 +126,7 @@ export const deleteDeployment = (_id) => {
         const request = {
             method: 'delete',
             responseType: 'json',
-            url: `${service_url}/deletedeployment`,
+            url: `${service_url}/deployments`,
             data: { "_id": _id },
             headers: {
                 'Content-Type': 'application/json'
