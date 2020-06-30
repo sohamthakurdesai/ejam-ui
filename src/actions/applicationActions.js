@@ -71,6 +71,11 @@ export const addDeployment = (data) => {
     let templateName = JSON.parse(data.get("templateObj")).name
     let version = data.get("version")
 
+    if(url === "" || templateName === "" || version === "") {
+        alert("Enter all the required data=> Template, Version and URL.")
+        return
+    }
+
     return async (dispatch) => {
         const request = {
             method: 'post',

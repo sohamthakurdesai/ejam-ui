@@ -29,6 +29,7 @@ const TemplateForm = () => {
                             type="select"
                             name="templateObj"
                             id="templateObj"
+                            defaultValue= {templateData[0]? templateData[0].name: ""}
                             onChange={(e) => {
                                 let templateObj = JSON.parse(e.target.value)
                                 setVersions([...templateObj.versions]);
