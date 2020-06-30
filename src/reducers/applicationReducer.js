@@ -2,7 +2,8 @@ const initialState = {
     templateData: [],
     deploymentData: [],
     templateDataFetchError: "",
-    deploymentDataFetchError: ""
+    deploymentDataFetchError: "",
+    deletedCount: 0
 }
 
 export default function applicationReducer(state = initialState, action) {
@@ -19,6 +20,14 @@ export default function applicationReducer(state = initialState, action) {
                 deploymentData: action.data,
                 deploymentDataFetchError: action.error
             };
+        case "ADD_NEW_DEPLOYMENT":
+            break;
+        case "DELETE_DEPLOYMENT":
+            console.log("action.deletedCount==", action.deletedCount)
+            return {
+                ...state,
+                deletedCount: action.deletedCount
+            }
         default:
             return state;
     }

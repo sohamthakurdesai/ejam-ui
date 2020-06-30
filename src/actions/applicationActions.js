@@ -89,17 +89,17 @@ export const addDeployment = (data) => {
         try {
             let response = await axios(request)
 
-            if(response.data) {
+            if(response.data && response.data.data) {
                 dispatch({
-                    type: "ADD_NEW_DEPLOYMENTS",
-                    data: response.data,
+                    type: "ADD_NEW_DEPLOYMENT",
+                    data: response.data.data,
                     error: ""
                 })
             }
         } catch (error) {
             console.log("Error:", error)
             dispatch({
-                type: "ADD_NEW_DEPLOYMENTS",
+                type: "ADD_NEW_DEPLOYMENT",
                 data: [],
                 error: "Error While getting the existing deployments. Contact Administrator."
             })
@@ -121,11 +121,10 @@ export const deleteDeployment = (_id) => {
     
         try {
             let response = await axios(request)
-    
-            if(response.data) {
+            if(response.data && response.data.data) {
                 dispatch({
                     type: "DELETE_DEPLOYMENT",
-                    data: response.data,
+                    deletedCount: response.data.data.deletedCount,
                     error: ""
                 })
             }
@@ -133,8 +132,8 @@ export const deleteDeployment = (_id) => {
             console.log("Error:", error)
             dispatch({
                 type: "DELETE_DEPLOYMENT",
-                data: [],
-                error: "Error While getting the existing deployments. Contact Administrator."
+                deletedCount: 0,
+                error: "Error While deleting the existing deployments. Contact Administrator."
             })
         }
     }
