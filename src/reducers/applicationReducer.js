@@ -23,7 +23,6 @@ export default function applicationReducer(state = initialState, action) {
         case "ADD_NEW_DEPLOYMENT":
             break;
         case "DELETE_DEPLOYMENT":
-            console.log("action.deletedCount==", action.deletedCount)
             return {
                 ...state,
                 deletedCount: action.deletedCount
