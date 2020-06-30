@@ -76,6 +76,15 @@ export const addDeployment = (data) => {
         return
     }
 
+    const expression = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
+
+    var regex = new RegExp(expression);
+
+    if(!regex.test(url)) {
+        alert("Enter a valid URL.")
+        return
+    }
+
     return async (dispatch) => {
         const request = {
             method: 'post',
