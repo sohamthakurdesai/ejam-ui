@@ -3,7 +3,8 @@ const initialState = {
     deploymentData: [],
     templateDataFetchError: "",
     deploymentDataFetchError: "",
-    deletedCount: 0
+    deletedCount: 0,
+    dataCount: 0
 }
 
 export default function applicationReducer(state = initialState, action) {
@@ -21,7 +22,11 @@ export default function applicationReducer(state = initialState, action) {
                 deploymentDataFetchError: action.error
             };
         case "ADD_NEW_DEPLOYMENT":
-            break;
+            console.log("action.dataCount==>", action.dataCount)
+            return {
+                ...state,
+                dataCount: action.dataCount
+            };
         case "DELETE_DEPLOYMENT":
             return {
                 ...state,
@@ -30,8 +35,14 @@ export default function applicationReducer(state = initialState, action) {
         case "RESET_DELETED_COUNT":
             return {
                 ...state,
-                deletedCount: 0
-            }
+                deletedCount: 0,
+                dataCount: 0
+            };
+        case "FORM_ERROR":
+            return {
+                ...state
+            };
+            break;
         default:
             return state;
     }

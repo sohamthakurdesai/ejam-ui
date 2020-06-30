@@ -5,14 +5,19 @@ import { deleteDeployment, getDeployments, resetDeletedCount } from '../actions/
 import moment from 'moment'
 
 const DeploymentDetails = () => {
-    let { deploymentData, deploymentDataFetchError, deletedCount } = useSelector(state => state.applicationReducer);
+    let { deploymentData, deploymentDataFetchError, deletedCount, dataCount} = useSelector(state => state.applicationReducer);
     const dispatch = useDispatch()
 
     if(deletedCount > 0) {
         dispatch(getDeployments())
         dispatch(resetDeletedCount())
     }
-
+    
+    if(dataCount > 0) {
+        dispatch(getDeployments())
+        dispatch(resetDeletedCount())
+    }
+    
     if(deploymentDataFetchError !== "") {
         return(
             <div className="div-common">

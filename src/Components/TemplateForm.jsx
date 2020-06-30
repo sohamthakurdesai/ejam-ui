@@ -22,6 +22,7 @@ const TemplateForm = () => {
                 <CardBody>
                     <Form onSubmit={(e) => {
                         const data = new FormData(e.target);
+                        e.preventDefault();
                         dispatch(addDeployment(data))
                     }}>
                         <Row>

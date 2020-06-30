@@ -3,9 +3,10 @@ import './App.css';
 import { Container } from 'reactstrap';
 import { useDispatch } from 'react-redux';
 import TemplateForm from './Components/TemplateForm';
+import DeploymentDetails from './Components/DeploymentDetails';
 import { getTemplatesAndVersions, getDeployments } from './actions/applicationActions'
-import CountdownTimer from './Components/CountdownTimer';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const dispatch = useDispatch()
@@ -14,7 +15,8 @@ function App() {
   return (
     <Container>
       <TemplateForm/>
-      <CountdownTimer/>
+      <DeploymentDetails/>
+      <ToastContainer />
     </Container>
   );
 }
