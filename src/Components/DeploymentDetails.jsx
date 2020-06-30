@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Button } from 'reactstrap';
+import { Table, Button, Card, CardBody, CardHeader } from 'reactstrap';
 import { deleteDeployment, getDeployments, resetDeletedCount } from '../actions/applicationActions';
 
 const DeploymentDetails = () => {
@@ -23,44 +23,54 @@ const DeploymentDetails = () => {
         if(deploymentData.length === 0) {
             return(
                 <div style={{'paddingTop':'40px'}}>
-                    No deployments.
+                    <Card>
+                        <CardHeader>Deployment Details</CardHeader>
+                        <CardBody>
+                            No deployments.
+                        </CardBody>
+                    </Card>
                 </div>
             )
         } else {
             return(
                 <div style={{'paddingTop':'40px'}}>
-                    <Table bordered responsive>
-                        <thead>
-                            <tr>
-                                <th>Template Name</th>
-                                <th>Version</th>
-                                <th>Deployed At</th>
-                                <th>Application URL</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                deploymentData.map((element, i) => {
-                                    return (
-                                        <tr key={element._id}>
-                                            <th>{element.templateName}</th>
-                                            <th>{element.version}</th>
-                                            <th>{element.createdAt}</th>
-                                            <th>{element.url}</th>
-                                            <th>
-                                                <Button id={element._id} onClick={(e) => {
-                                                    let _id = e.target.id
-                                                    dispatch(deleteDeployment(_id))
-                                                }}>
-                                                    Delete
-                                                </Button>
-                                            </th>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </Table>
+                    <Card>
+                        <CardHeader>Deployment Details</CardHeader>
+                        <CardBody>
+                        <Table bordered responsive>
+                            <thead>
+                                <tr>
+                                    <th>Template Name</th>
+                                    <th>Version</th>
+                                    <th>Deployed At</th>
+                                    <th>Application URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    deploymentData.map((element, i) => {
+                                        return (
+                                            <tr key={element._id}>
+                                                <th>{element.templateName}</th>
+                                                <th>{element.version}</th>
+                                                <th>{element.createdAt}</th>
+                                                <th>{element.url}</th>
+                                                <th>
+                                                    <Button id={element._id} onClick={(e) => {
+                                                        let _id = e.target.id
+                                                        dispatch(deleteDeployment(_id))
+                                                    }}>
+                                                        Delete
+                                                    </Button>
+                                                </th>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </Table>
+                        </CardBody>
+                    </Card>
                 </div>
             )
         }
