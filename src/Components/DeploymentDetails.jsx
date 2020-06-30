@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Button } from 'reactstrap';
-import { deleteDeployment, getDeployments } from '../actions/applicationActions';
+import { deleteDeployment, getDeployments, resetDeletedCount } from '../actions/applicationActions';
 
 const DeploymentDetails = () => {
     let { deploymentData, deploymentDataFetchError, deletedCount } = useSelector(state => state.applicationReducer);
@@ -9,6 +9,7 @@ const DeploymentDetails = () => {
 
     if(deletedCount > 0) {
         dispatch(getDeployments())
+        dispatch(resetDeletedCount())
     }
 
     if(deploymentDataFetchError !== "") {

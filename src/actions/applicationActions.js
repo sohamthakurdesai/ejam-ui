@@ -138,3 +138,11 @@ export const deleteDeployment = (_id) => {
         }
     }
 }
+
+export const resetDeletedCount = () => {
+    return (dispatch) => {
+        dispatch({
+            type: "RESET_DELETED_COUNT"
+        })
+    }
+}

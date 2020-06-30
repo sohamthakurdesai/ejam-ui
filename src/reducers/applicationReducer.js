@@ -27,6 +27,11 @@ export default function applicationReducer(state = initialState, action) {
                 ...state,
                 deletedCount: action.deletedCount
             }
+        case "RESET_DELETED_COUNT":
+            return {
+                ...state,
+                deletedCount: 0
+            }
         default:
             return state;
     }
