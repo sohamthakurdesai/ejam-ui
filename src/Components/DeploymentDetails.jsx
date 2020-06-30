@@ -14,15 +14,17 @@ const DeploymentDetails = () => {
 
     if(deploymentDataFetchError !== "") {
         return(
-            <div style={{'paddingTop':'40px'}}>
-                Error: {deploymentDataFetchError}
+            <div className="div-common">
+                <Card>
+                    Error: {deploymentDataFetchError}
+                </Card>
             </div>
         )
     } else {
 
         if(deploymentData.length === 0) {
             return(
-                <div style={{'paddingTop':'40px'}}>
+                <div className="div-common">
                     <Card>
                         <CardHeader>Deployment Details</CardHeader>
                         <CardBody>
@@ -33,7 +35,7 @@ const DeploymentDetails = () => {
             )
         } else {
             return(
-                <div style={{'paddingTop':'40px'}}>
+                <div className="div-common">
                     <Card>
                         <CardHeader>Deployment Details</CardHeader>
                         <CardBody>

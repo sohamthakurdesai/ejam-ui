@@ -9,16 +9,14 @@ const TemplateForm = () => {
 
     const dispatch = useDispatch()
 
-    //border:'2px solid #00000
-
     return(
         templateDataFetchError !== "" ?
-        <div style={{'paddingTop':'40px'}}>
-            <Card style={{'padding':'10px'}}>
+        <div className="div-common">
+            <Card>
                 Error: {templateDataFetchError}
             </Card>
         </div> :
-        <div style={{'paddingTop':'40px'}}>
+        <div className="div-common">
             <Card>
                 <CardHeader>Template Form</CardHeader>
                 <CardBody>
