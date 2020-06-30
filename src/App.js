@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import DeploymentDetails from './Components/DeploymentDetails';
 import TemplateForm from './Components/TemplateForm';
 import { getTemplatesAndVersions, getDeployments } from './actions/applicationActions'
+import CountdownTimer from './Components/CountdownTimer';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
   return (
     <Container>
       <TemplateForm/>
-      <DeploymentDetails/>
+      <CountdownTimer/>
     </Container>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Button, Card, CardBody, CardHeader } from 'reactstrap';
 import { deleteDeployment, getDeployments, resetDeletedCount } from '../actions/applicationActions';
+import moment from 'moment'
 
 const DeploymentDetails = () => {
     let { deploymentData, deploymentDataFetchError, deletedCount } = useSelector(state => state.applicationReducer);
@@ -55,7 +56,7 @@ const DeploymentDetails = () => {
                                             <tr key={element._id}>
                                                 <th>{element.templateName}</th>
                                                 <th>{element.version}</th>
-                                                <th>{element.createdAt}</th>
+                                                <th>{moment(element.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</th>
                                                 <th>{element.url}</th>
                                                 <th>
                                                     <Button id={element._id} onClick={(e) => {
