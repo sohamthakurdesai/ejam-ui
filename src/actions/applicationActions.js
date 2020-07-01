@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 const service_url = process.env.REACT_APP_EJAM_SERVICE_URI
 
 export const getTemplatesAndVersions = () => {
@@ -72,8 +74,12 @@ export const addDeployment = (data) => {
     let version = data.get("version")
 
     if(url === "" || templateName === "" || version === "") {
-        alert("Enter all the required data=> Template, Version and URL.")
-        return
+        toast.error("Enter all the required data: Template, Version and URL.")
+        return (dispatch) => {
+            dispatch({
+                type: "FORM_ERROR"
+            })
+        }
     }
 
     const expression = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
@@ -81,8 +87,12 @@ export const addDeployment = (data) => {
     var regex = new RegExp(expression);
 
     if(!regex.test(url)) {
-        alert("Enter a valid URL.")
-        return
+        toast.error("Enter a valid URL.")
+        return (dispatch) => {
+            dispatch({
+                type: "FORM_ERROR"
+            })
+        }
     }
 
     return async (dispatch) => {
@@ -104,17 +114,19 @@ export const addDeployment = (data) => {
             let response = await axios(request)
 
             if(response.data && response.data.data) {
+                toast.success("Deployment initiated. List would get updated once deployment is done.")
                 dispatch({
                     type: "ADD_NEW_DEPLOYMENT",
-                    data: response.data.data,
+                    deploymentSuccess: true,
                     error: ""
                 })
+                // dispatch(getDeployments())
             }
         } catch (error) {
             console.log("Error:", error)
             dispatch({
                 type: "ADD_NEW_DEPLOYMENT",
-                data: [],
+                deploymentSuccess: false,
                 error: "Error While getting the existing deployments. Contact Administrator."
             })
         }
@@ -157,6 +169,30 @@ export const resetDeletedCount = () => {
     return (dispatch) => {
         dispatch({
             type: "RESET_DELETED_COUNT"
+        })
+    }
+}
+
+export const currentDeploymentDone = () => {
+    return (dispatch) => {
+        dispatch({
+            type: "CURRENT_DEPLOYEMENT_DONE"
+        })
+    }
+}
+
+export const timerStatus = () => {
+    return (dispatch) => {
+        dispatch({
+            type: "SET_TIMER"
+        })
+    }
+}
+
+export const resetTimerStatus = () => {
+    return (dispatch) => {
+        dispatch({
+            type: "RESET_TIMER"
         })
     }
 }

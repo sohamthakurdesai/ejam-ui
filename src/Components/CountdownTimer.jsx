@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DeploymentDetails from './DeploymentDetails';
+import { useSelector, useDispatch } from 'react-redux';
+import { resetTimerStatus } from '../actions/applicationActions';
 
 const getRandomMillisecondsWithinMinute = () => {
     return Math.floor(Math.random() * 30000);
@@ -7,8 +9,11 @@ const getRandomMillisecondsWithinMinute = () => {
 let endTimeInMilliseconds = new Date().getTime() + getRandomMillisecondsWithinMinute()
 
 const CountdownTimer = () => {
-    const calculateTimeLeft = () => {
 
+    let { isTimerRunning } = useSelector(state => state.applicationReducer);
+    const dispatch = useDispatch()
+
+    const calculateTimeLeft = () => {
         let currentTime = new Date()
 
         const difference = endTimeInMilliseconds - currentTime;
@@ -48,10 +53,16 @@ const CountdownTimer = () => {
         );
     });
 
+    let localIsTimerRunning = isTimerRunning
+
+    if(localIsTimerRunning) {
+        dispatch(resetTimerStatus())
+    }
+
     return (
         <div>
             {
-                timerComponents.length ? <span>Loading the latest deployment(s) list in {timerComponents} </span> : <DeploymentDetails/>
+                localIsTimerRunning && timerComponents.length ? <span>Loading the latest deployment(s) list in {timerComponents} </span> : <DeploymentDetails/>
             }   
         </div>
     );

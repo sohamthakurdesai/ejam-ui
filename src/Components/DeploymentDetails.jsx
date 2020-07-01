@@ -1,16 +1,22 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, Button, Card, CardBody, CardHeader } from 'reactstrap';
-import { deleteDeployment, getDeployments, resetDeletedCount } from '../actions/applicationActions';
+import { deleteDeployment, getDeployments, resetDeletedCount, currentDeploymentDone, timerStatus } from '../actions/applicationActions';
 import moment from 'moment'
 
 const DeploymentDetails = () => {
-    let { deploymentData, deploymentDataFetchError, deletedCount } = useSelector(state => state.applicationReducer);
+    let { deploymentData, deploymentDataFetchError, deletedCount, deploymentSuccess } = useSelector(state => state.applicationReducer);
     const dispatch = useDispatch()
 
     if(deletedCount > 0) {
         dispatch(getDeployments())
         dispatch(resetDeletedCount())
+    }
+
+    if(deploymentSuccess) {
+        dispatch(getDeployments())
+        dispatch(currentDeploymentDone())
+        dispatch(timerStatus())
     }
 
     if(deploymentDataFetchError !== "") {
