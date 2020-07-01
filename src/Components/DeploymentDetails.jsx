@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Button, Card, CardBody, CardHeader } from 'reactstrap';
+import { Table, Button, Card, CardBody, CardHeader, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { deleteDeployment, getDeployments, resetDeletedCount } from '../actions/applicationActions';
 import moment from 'moment'
 
 const DeploymentDetails = () => {
     let { deploymentData, deploymentDataFetchError, deletedCount, dataCount} = useSelector(state => state.applicationReducer);
     const dispatch = useDispatch()
+
+    const [modal, setModal] = useState(false);
+    const [_id, setId] = useState("");
+
+    const toggle = () => setModal(!modal);
+
+    const handleDelete = () => {
+        dispatch(deleteDeployment(_id))
+        toggle()
+    } 
 
     if(deletedCount > 0) {
         dispatch(getDeployments())
@@ -66,8 +76,8 @@ const DeploymentDetails = () => {
                                                 <th>{element.url}</th>
                                                 <th>
                                                     <Button id={element._id} onClick={(e) => {
-                                                        let _id = e.target.id
-                                                        dispatch(deleteDeployment(_id))
+                                                        setId(e.target.id)
+                                                        toggle()
                                                     }}>
                                                         Delete
                                                     </Button>
@@ -80,6 +90,15 @@ const DeploymentDetails = () => {
                         </Table>
                         </CardBody>
                     </Card>
+                    <Modal isOpen={modal} toggle={toggle}>
+                        <ModalBody>
+                                You are about to delete the selected deployment.
+                        </ModalBody>
+                        <ModalFooter>
+                        <Button onClick={handleDelete}>Confirm</Button>{' '}
+                        <Button onClick={toggle}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
                 </div>
             )
         }
