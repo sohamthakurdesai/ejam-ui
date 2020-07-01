@@ -69,7 +69,7 @@ export const getDeployments = () => {
 
 export const addDeployment = (data) => {
     let url = data.get("url")
-    let templateName = JSON.parse(data.get("templateObj")).name
+    let templateName = JSON.parse(data.get("templateObj")) ? JSON.parse(data.get("templateObj")).name : ""
     let version = data.get("version")
 
     if(url === "" || templateName === "" || version === "") {
