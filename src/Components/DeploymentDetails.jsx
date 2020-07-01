@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Button, Card, CardBody, CardHeader, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Table, Button, Card, CardBody, CardHeader, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { deleteDeployment, getDeployments, resetDeletedCount } from '../actions/applicationActions';
 import moment from 'moment'
 

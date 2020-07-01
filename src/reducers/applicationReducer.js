@@ -22,7 +22,6 @@ export default function applicationReducer(state = initialState, action) {
                 deploymentDataFetchError: action.error
             };
         case "ADD_NEW_DEPLOYMENT":
-            console.log("action.dataCount==>", action.dataCount)
             return {
                 ...state,
                 dataCount: action.dataCount
@@ -42,7 +41,6 @@ export default function applicationReducer(state = initialState, action) {
             return {
                 ...state
             };
-            break;
         default:
             return state;
     }
